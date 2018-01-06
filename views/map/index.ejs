@@ -10,6 +10,7 @@
     <form id="addressForm">
       <input id="address" type="textbox" value="Enter address here">
       <input id="submit" type="button" value="Geocode">
+    </form>
 <script>
         function initMap() {
         var position = {lat: 40.7525703, lng: -73.9776273};
@@ -25,12 +26,26 @@
          let locations = <%- JSON.stringify(locations) %>
           for(i = 0; i < locations.length; i++){
             let pooIcon = new google.maps.Marker({
+            class: 'pooIcon',
              position: {lat: locations[i].lat, lng: locations[i].lng},
              map: map,
              icon: icon })
+              let infoWindow = new google.maps.InfoWindow;
+              let infowincontent = document.createElement('div');
+              let strong = document.createElement('strong');
+              strong.textContent = locations[i].name;
+              infowincontent.appendChild(strong);
+              infowincontent.appendChild(document.createElement('br'));
+              var text = document.createElement('text');
+              text.textContent = locations[i].address
+              infowincontent.appendChild(text);
+              pooIcon.addListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, pooIcon);
+              });
            }
 
-         var geocoder = new google.maps.Geocoder();
+                  var geocoder = new google.maps.Geocoder();
 
 document.getElementById('submit').addEventListener('click', function() {
   geocodeAddress(geocoder, map);
@@ -40,7 +55,7 @@ function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
-            console.log(results);
+            console.log(google.maps.Marker);
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
               map: resultsMap,
