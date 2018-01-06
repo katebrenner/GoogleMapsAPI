@@ -2,9 +2,11 @@
  const mapController = {}
 
 mapController.index = (req, res) => {
-  mapModel.findall().then(locations => {
+  mapModel.findall().then( locations => {
+    console.log(locations);
+    console.log(locations[0].name);
     res.render('map/index', {
-      data: locations
+      locations: locations
     });
   }).catch(err => {
     console.log(err);
