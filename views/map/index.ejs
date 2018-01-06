@@ -7,6 +7,7 @@
   <body>
     <h3>WHERE 2 PEE NYC</h3>
     <div id="map"></div>
+    <a href="/map/new">Add a movie!</a>
     <form id="addressForm">
       <input id="address" type="textbox" value="Enter address here">
       <input id="submit" type="button" value="Geocode">
@@ -33,12 +34,17 @@
               let infoWindow = new google.maps.InfoWindow;
               let infowincontent = document.createElement('div');
               let strong = document.createElement('strong');
-              strong.textContent = locations[i].name;
+              strong.innerHTML = locations[i].name;
               infowincontent.appendChild(strong);
               infowincontent.appendChild(document.createElement('br'));
-              var text = document.createElement('text');
+              var text = document.createElement('h2');
               text.textContent = locations[i].address
               infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+              let button = document.createElement('a');
+              button.setAttribute('href', '/map/edit');
+              button.innerHTML = "edit";
+              infowincontent.appendChild(button);
               pooIcon.addListener('click', function() {
                 infoWindow.setContent(infowincontent);
                 infoWindow.open(map, pooIcon);
