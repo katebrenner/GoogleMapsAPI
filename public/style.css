@@ -1,16 +1,36 @@
-       #map {
-        height: 100%;
-        width: 100%;
-        margin: 0 auto;
-        border: 1px solid black;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background-color: grey;
-      }
-      h3 {
-        text-align: center;
-      }
+#side {
+  width: 25%;
+  height: 100%;
+  overflow: scroll;
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: white;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: grey;
+}
+
+h3 {
+  text-align: center;
+}
+
+#locationInfo{
+  display: none;
+}
+
+#lat, #lng {
+  display: none;
+}

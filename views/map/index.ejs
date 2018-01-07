@@ -6,11 +6,20 @@
   </head>
   <body>
     <h3>WHERE 2 PEE NYC</h3>
+
     <div id="map"></div>
-    <form id="addressForm">
+    <div id="side">
+    <h1><a href ="/map/new"> Add PEE location!</a></h1
+    <form id="addressForm" action="/map/new">
       <input id="address" type="textbox" value="Enter address here">
       <input id="submit" type="button" value="Geocode">
     </form>
+    <% for(i = 0; i < locations.length; i++) { %>
+      <p> <%= locations[i].name %></a> </p>
+      <p> <%= locations[i].address %> </p>
+  <% } %>
+
+  </div>
 <script>
         function initMap() {
         var position = {lat: 40.7525703, lng: -73.9776273};
@@ -33,12 +42,17 @@
               let infoWindow = new google.maps.InfoWindow;
               let infowincontent = document.createElement('div');
               let strong = document.createElement('strong');
-              strong.textContent = locations[i].name;
+              strong.innerHTML = locations[i].name;
               infowincontent.appendChild(strong);
               infowincontent.appendChild(document.createElement('br'));
-              var text = document.createElement('text');
+              var text = document.createElement('h2');
               text.textContent = locations[i].address
               infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+              let button = document.createElement('a');
+              button.setAttribute('href', '/map/edit');
+              button.innerHTML = "edit";
+              infowincontent.appendChild(button);
               pooIcon.addListener('click', function() {
                 infoWindow.setContent(infowincontent);
                 infoWindow.open(map, pooIcon);
@@ -55,7 +69,7 @@ function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
-            console.log(google.maps.Marker);
+            console.log(results[0].geometry.bounds.b);
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
               map: resultsMap,
