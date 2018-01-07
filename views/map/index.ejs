@@ -9,7 +9,7 @@
 
     <div id="map"></div>
     <div id="side">
-    <h1>Add PEE location!</h1
+    <h1><a href ="/map/new"> Add PEE location!</a></h1
     <form id="addressForm" action="/map/new">
       <input id="address" type="textbox" value="Enter address here">
       <input id="submit" type="button" value="Geocode">
@@ -69,7 +69,7 @@ function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
-            console.log(google.maps.Marker);
+            console.log(results[0].geometry.bounds.b);
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
               map: resultsMap,

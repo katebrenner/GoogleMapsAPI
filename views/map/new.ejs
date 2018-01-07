@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-<h1>Add a location</h1>
+<h1>Add a location</a></h1>
 
 <h1>this is new page </h1>
 
@@ -12,23 +12,48 @@
       <input id="address" type="textbox" name ="address">
       <input id="submit" type="button" value="Geocode">
     </form>
-<ul>
-<li class = 'name'></li>
-<li class = 'address'></li>
-<li class = 'lat'></li>
-<li class = 'long'></li>
-<li class = 'type'></li>
-</ul>
+
+</form>
+<form id ="locationInfo" method='POST' action='/map'>
+<span> name: </span><input name = 'name' required><br>
+<span> address: <input name = 'address' required></span><br>
+<li id = 'lat'></li>
+<li id = 'long'></li>
+<input type='submit' value='Submit!'/>
+</form>
 
 
 
 <script>
 
+  function initMap() {
+let geocoder = new google.maps.Geocoder();
+
+document.getElementById('submit').addEventListener('click', function() {
+  geocodeAddress(geocoder);
+        });
+
+function geocodeAddress(geocoder) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            document.getElementById('locationInfo').style.display = 'inherit';
+            document.getElementById('lat').innerHTML = (results[0].geometry.bounds.f.b + results[0].geometry.bounds.f.f)/2;
+            document.getElementById('long').innerHTML = (results[0].geometry.bounds.b.b + results[0].geometry.bounds.b.f)/2;
+
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+}
 
 
 
 </script>
-
+ <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk&callback=initMap">
+    </script>
   </body>
 </html>
 
