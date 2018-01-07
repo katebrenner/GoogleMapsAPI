@@ -8,17 +8,18 @@
 
 <h1>this is new page </h1>
 
-    <form id="addressForm">
+    <div id="addressForm">
       <input id="address" type="textbox" name ="address">
       <input id="submit" type="button" value="Geocode">
-    </form>
+    </div>
 
 </form>
 <form id ="locationInfo" method='POST' action='/map'>
 <span> name: </span><input name = 'name' required><br>
 <span> address: <input name = 'address' required></span><br>
-<li id = 'lat'></li>
-<li id = 'long'></li>
+<span> type: <input name = 'type' required></span><br>
+<input id = 'lat' name= 'lat' required>
+<input id = 'lng' name = 'lng' required>
 <input type='submit' value='Submit!'/>
 </form>
 
@@ -38,8 +39,8 @@ function geocodeAddress(geocoder) {
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
             document.getElementById('locationInfo').style.display = 'inherit';
-            document.getElementById('lat').innerHTML = (results[0].geometry.bounds.f.b + results[0].geometry.bounds.f.f)/2;
-            document.getElementById('long').innerHTML = (results[0].geometry.bounds.b.b + results[0].geometry.bounds.b.f)/2;
+            document.getElementById('lat').value = (results[0].geometry.bounds.f.b + results[0].geometry.bounds.f.f)/2;
+            document.getElementById('lng').value = (results[0].geometry.bounds.b.b + results[0].geometry.bounds.b.f)/2;
 
           } else {
             alert('Geocode was not successful for the following reason: ' + status);

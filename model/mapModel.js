@@ -17,4 +17,6 @@ mapModel.create = locations => {
   );
 };
 
+
+
 module.exports = mapModel
