@@ -6,12 +6,20 @@
   </head>
   <body>
     <h3>WHERE 2 PEE NYC</h3>
+
     <div id="map"></div>
-    <a href="/map/new">Add a movie!</a>
-    <form id="addressForm">
+    <div id="side">
+    <h1>Add PEE location!</h1
+    <form id="addressForm" action="/map/new">
       <input id="address" type="textbox" value="Enter address here">
       <input id="submit" type="button" value="Geocode">
     </form>
+    <% for(i = 0; i < locations.length; i++) { %>
+      <p> <%= locations[i].name %></a> </p>
+      <p> <%= locations[i].address %> </p>
+  <% } %>
+
+  </div>
 <script>
         function initMap() {
         var position = {lat: 40.7525703, lng: -73.9776273};

@@ -1,3 +1,14 @@
+       #side {
+        width: 25%;
+        height: 100%;
+        overflow: scroll;
+        z-index: 1;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: white;
+       }
+
        #map {
         height: 100%;
         width: 100%;
