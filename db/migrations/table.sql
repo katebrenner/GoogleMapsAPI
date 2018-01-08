@@ -1,0 +1,16 @@
+\c mapdb
+
+DROP TABLE IF EXISTS locations;
+
+CREATE TABLE IF NOT EXISTS locations (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(60) NOT NULL,
+  address VARCHAR(80) NOT NULL,
+  lat REAL NOT NULL,
+  lng REAL NOT NULL,
+  type VARCHAR(30) NOT NULL
+);
+
+
+
+-- ALTER TABLE movies ADD COLUMN director_id INTEGER;
