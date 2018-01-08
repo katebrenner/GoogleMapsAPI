@@ -43,7 +43,7 @@ function geocodeAddress(geocoder) {
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
-            console.log('got this back', results[0].geometry)
+            console.log('got this back', results[0])
             document.getElementById('locationInfo').style.display = 'inherit';
             document.getElementById('lat').value = (results[0].geometry.bounds.f.b + results[0].geometry.bounds.f.f)/2;
             document.getElementById('lng').value = (results[0].geometry.bounds.b.b + results[0].geometry.bounds.b.f)/2;

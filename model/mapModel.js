@@ -17,6 +17,11 @@ mapModel.create = locations => {
   );
 };
 
+mapModel.findById = (id) => {
+  return db.oneOrNone(`SELECT * FROM locations WHERE id = $1`, [id])
+}
+
+
 
 
 module.exports = mapModel
