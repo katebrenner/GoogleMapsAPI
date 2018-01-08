@@ -9,10 +9,10 @@
 
     <div id="map"></div>
     <div id="side">
-    <h1><a href ="/map/new"> Add PEE location!</a></h1
-    <form id="addressForm" action="/map/new">
-      <input id="address" type="textbox" value="Enter address here">
-      <input id="submit" type="button" value="Geocode">
+    <h1><a href ="/map/new"> Add PEE location!</a></h1>
+    <form id="addressForm" action="/map/search" method= "POST">
+      <input id="address" type="textbox" value="Enter address here" name= 'address'>
+      <input type = 'submit'>
     </form>
     <% for(i = 0; i < locations.length; i++) { %>
       <p> <%= locations[i].name %></a> </p>
@@ -61,9 +61,7 @@
 
                   var geocoder = new google.maps.Geocoder();
 
-document.getElementById('submit').addEventListener('click', function() {
-  geocodeAddress(geocoder, map);
-        });
+
 
 function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
