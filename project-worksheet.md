@@ -20,19 +20,32 @@ Use this section to describe your final project and perhaps any links to relevan
 
 ## Priority Matrix
 
-Include a full list of features that have been prioritized based on the `Time and Importance` Matix.  
+Include a full list of features that have been prioritized based on the `Time and Importance` Matix. 
+- 2 tables: 1 for locations and 1 for venue type - 5 hours
+- Google maps API that renders map and pulls lat and long from locations table and renders to map - 8 hours
+- Crud functionality allowing user to add locations - 12 hours
 
 ## MVP 
-
+ 
 Include the full list of features that will be part of your MVP 
-
+- 2 tables: 1 for locations and 1 for venue type
+- Google maps API that renders map and pulls lat and long from locations table and renders to map
+- Crud functionality allowing user to add locations
 ## POST MVP
+- Google autocomplete for addresses
+- User Auth
+- Have all CRUD functionality one page so user doesn't have to leave page
+- Have user be able to upload pics
 
 Include the full list of features that you are considering for POST MVP
 
 ## Wireframes
 
 Include images of your wireframes. 
+
+![](https://i.imgur.com/iI5NNo6.jpg)
+![](https://i.imgur.com/Y3gGpSk.jpg?1)
+
 
 ## App Components
 
