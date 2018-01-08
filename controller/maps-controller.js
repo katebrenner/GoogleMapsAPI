@@ -1,6 +1,8 @@
  const mapModel = require('../model/mapModel');
+ const venueModel = require('../model/venueModel');
  const axios = require('axios');
  const mapController = {}
+
 
 mapController.index = (req, res) => {
   mapModel.findall().then( locations => {
@@ -17,10 +19,10 @@ mapController.index = (req, res) => {
 
 
 mapController.new = (req, res) => {
-  mapModel.findall()
-    .then(locations => {
-      res.render('map/new', { locations: locations })
-      console.log(locations)
+  venueModel.findall()
+    .then(venue => {
+      res.render('map/new', {venue: venue})
+      console.log(venue)
     })
     .catch(err => {
       res.status(400).json(err);
@@ -34,10 +36,10 @@ mapController.create = (req, res) => {
       address: req.body.address,
       lat: req.body.lat,
       lng: req.body.lng,
-      type: req.body.type
+      venue_id: req.body.venue_id
     })
     .then(locations => {
-      res.redirect(`/locations/${locations.id}`)
+      res.redirect(`/map/${locations.id}`)
     })
     .catch(err => {
       res.status(400).json(err);

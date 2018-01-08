@@ -12,12 +12,17 @@
       <input id="address" type="textbox" name ="address">
       <input id="submit" type="button" value="Geocode">
     </div>
-
 </form>
 <form id ="locationInfo" method='POST' action='/map'>
 <span> name: </span><input name = 'name' required><br>
 <span> address: <input name = 'address' required></span><br>
-<span> type: <input name = 'type' required></span><br>
+<select id='venue_id' name='venue_id'>
+  <% venue.forEach(venue => { %>
+    <option value="<%= venue.venue_id %>">
+      <%= `${venue.venue_type}` %>
+    </option>
+  <% }) %>
+</select>
 <input id = 'lat' name= 'lat' required>
 <input id = 'lng' name = 'lng' required>
 <input type='submit' value='Submit!'/>
@@ -38,6 +43,7 @@ function geocodeAddress(geocoder) {
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
+            console.log('got this back', results[0].geometry)
             document.getElementById('locationInfo').style.display = 'inherit';
             document.getElementById('lat').value = (results[0].geometry.bounds.f.b + results[0].geometry.bounds.f.f)/2;
             document.getElementById('lng').value = (results[0].geometry.bounds.b.b + results[0].geometry.bounds.b.f)/2;

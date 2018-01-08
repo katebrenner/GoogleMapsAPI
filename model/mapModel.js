@@ -10,10 +10,10 @@ mapModel.create = locations => {
   return db.one(
     `
       INSERT INTO locations
-      (name, address, lat, lng, type)
+      (name, address, lat, lng, venue_id)
       VALUES ($1, $2, $3, $4, $5) RETURNING *
     `,
-    [locations.name, locations.address, locations.lat, locations.lng, locations.type]
+    [locations.name, locations.address, locations.lat, locations.lng, locations.venue_id]
   );
 };
 
