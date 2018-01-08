@@ -28,9 +28,9 @@ h3 {
 }
 
 #locationInfo{
-  display: none;
+  /*display: none;*/
 }
 
 #lat, #lng {
-  display: none;
+  /*display: none;*/
 }
