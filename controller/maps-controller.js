@@ -51,7 +51,6 @@ mapController.create = (req, res) => {
       venue_id: req.body.venue_id
     })
     .then((params) => {
-      console.log('this is req.params.id ' + req.params.id)
       res.redirect(`/map/${params.id}`)
     })
     .catch(err => {
@@ -64,6 +63,7 @@ mapController.show = (req, res) => {
     .then(locations => {
         venueModel.findById(locations.venue_id)
           .then(venue => {
+            console.log('hi')
             res.render('map/show', { locations: locations, venue: venue })
           })
           .catch(err => {
@@ -83,6 +83,18 @@ mapController.edit = (req,res) => {
     .catch(err => {
       res.status(400).json(err)
     })
+}
+
+mapController.update = (req, res) => {
+  mapModel.update({
+    name: req.body.name
+  }, req.params.id)
+  .then(() => {
+    res.redirect(`/map/${req.params.id}`)
+  })
+  .catch(err => {
+    res.status(400).json(err)
+  })
 }
 
  module.exports = mapController

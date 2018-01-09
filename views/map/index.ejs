@@ -50,7 +50,7 @@
               infowincontent.appendChild(text);
               infowincontent.appendChild(document.createElement('br'));
               let button = document.createElement('a');
-              button.setAttribute('href', '/map/edit');
+              button.setAttribute('href', `map/${locations[i].id}/edit`);
               button.innerHTML = "edit";
               infowincontent.appendChild(button);
               pooIcon.addListener('click', function() {

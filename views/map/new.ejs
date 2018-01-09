@@ -10,7 +10,6 @@
 
 
 <form id ="locationInfo" method='POST' action='/map'>
-<input id="address" type="textbox" name ="address">
 <span> name: </span><input name = 'name' required><br>
 <span> address: <input name = 'address' required></span><br>
 <select id='venue_id' name='venue_id'>
@@ -28,9 +27,10 @@
 
 
 <script>
-  document.getElementById('address').value = <%= address %>;
+  // document.getElementById('address').value = <%= address.toString() %>;
   document.getElementById('lat').value = <%= latval %>;
   document.getElementById('lng').value = <%= lngval %>;
+  // console.log(typeof(<%= address %>))
 </script>
 
   </body>

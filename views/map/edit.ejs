@@ -1,1 +1,13 @@
 <h1> edit page </h1>
+<%# views/map/edit.ejs %>
+
+<form action="/map" method="PUT">
+  <label for="name">Name</label>
+  <input id="title" type="text" name="name" value="<%= locations.name %>" />
+
+  <br />
+
+  <input type="submit" value="Save changes" />
+</form>
+
+<a href="<%= `/map/${locations.id}` %>">Cancel</a>

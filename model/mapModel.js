@@ -19,7 +19,18 @@ mapModel.create = locations => {
 
 mapModel.findById = (id) => {
   return db.oneOrNone(`SELECT * FROM locations WHERE id = $1`, [id])
-}
+};
+
+mapModel.update = (locations, id) => {
+  return db.none(
+    `
+    UPDATE locations SET
+    name = $1,
+    WHERE id = $2
+   `,
+    [locations.name, id]
+    );
+};
 
 
 
