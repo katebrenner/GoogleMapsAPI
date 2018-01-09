@@ -89,9 +89,10 @@ mapController.update = (req, res) => {
     name: req.body.name
   }, req.params.id)
   .then(() => {
-    res.redirect(`/map/${req.params.id}`)
+    res.redirect('/')
   })
   .catch(err => {
+    console.log(err)
     res.status(400).json(err)
   })
 };

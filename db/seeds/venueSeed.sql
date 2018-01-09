@@ -6,5 +6,8 @@ INSERT INTO venue (venue_type) VALUES
 ('Department Store'),
 ('Book Store'),
 ('Restaurant'),
-('Train Station'),
+('Transit'),
+('Hotel'),
+('Park'),
+('Grovery'),
 ('Other');

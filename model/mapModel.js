@@ -2,7 +2,7 @@ const db = require('../db/config');
 const mapModel = {}
 
 mapModel.findall = () => {
-  return db.query('SELECT * FROM locations')
+  return db.query('SELECT * FROM locations ORDER BY lng DESC')
 }
 
 
@@ -25,7 +25,7 @@ mapModel.update = (locations, id) => {
   return db.none(
     `
     UPDATE locations SET
-    name = $1,
+    name = $1
     WHERE id = $2
    `,
     [locations.name, id]

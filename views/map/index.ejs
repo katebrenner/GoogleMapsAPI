@@ -3,6 +3,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
   </head>
   <body>
 
@@ -17,13 +18,10 @@
       <img class = "emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_large.png?v=1480481059">
     </h1>
     <form id="addressForm" action="/map/search" method= "POST">
-      <input id="address" type="textbox" value="Enter address here" name= 'address'>
+      <input id="address" type="textbox" placeholder="Enter address here" name= 'address'>
       <input type = 'submit'>
     </form>
-    <% for(i = 0; i < locations.length; i++) { %>
-      <h2> <a href="<%= `/map/${locations[i].id}` %>"><%= locations[i].name %></a> </h2>
-      <h4> <%= locations[i].address %> </h4>
-  <% } %>
+
 
   </div>
 <script>
@@ -51,7 +49,7 @@
               strong.innerHTML = locations[i].name;
               infowincontent.appendChild(strong);
               infowincontent.appendChild(document.createElement('br'));
-              var text = document.createElement('h2');
+              let text = document.createElement('h2');
               text.textContent = locations[i].address
               infowincontent.appendChild(text);
               infowincontent.appendChild(document.createElement('br'));
@@ -59,13 +57,23 @@
               button.setAttribute('href', `map/${locations[i].id}/edit`);
               button.innerHTML = "edit";
               infowincontent.appendChild(button);
+              // let H2 = document.getElementsByClassName('test');
+              let h2 = document.createElement('h2');
+              h2.innerHTML = locations[i].name;
+              document.getElementById('side').appendChild(h2);
               pooIcon.addListener('click', function() {
                 infoWindow.setContent(infowincontent);
                 infoWindow.open(map, pooIcon);
               });
-           }
 
-                  var geocoder = new google.maps.Geocoder();
+               h2.addEventListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, pooIcon);
+
+           })
+         }
+
+    var geocoder = new google.maps.Geocoder();
 
 
 
