@@ -6,7 +6,6 @@
 
 mapController.index = (req, res) => {
   mapModel.findall().then( locations => {
-    console.log('this is locations:' + locations);
     console.log(locations[0].name);
     res.render('map/index', {
       locations: locations
@@ -15,7 +14,7 @@ mapController.index = (req, res) => {
     console.log(err);
     res.status(500).json(err)
   })
-}
+};
 
 
 mapController.new = (req, res) => {
@@ -83,7 +82,7 @@ mapController.edit = (req,res) => {
     .catch(err => {
       res.status(400).json(err)
     })
-}
+};
 
 mapController.update = (req, res) => {
   mapModel.update({
@@ -95,6 +94,16 @@ mapController.update = (req, res) => {
   .catch(err => {
     res.status(400).json(err)
   })
-}
+};
+
+mapController.destroy = (req, res) => {
+  mapModel.destroy(req.params.id)
+    .then(() => {
+      res.redirect('/map')
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+};
 
  module.exports = mapController

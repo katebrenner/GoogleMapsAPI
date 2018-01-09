@@ -32,6 +32,17 @@ mapModel.update = (locations, id) => {
     );
 };
 
+mapModel.destroy = id => {
+  return db.none(
+    `
+      DELETE FROM locations
+      WHERE id = $1
+    `,
+    [id]
+  );
+}
+
+
 
 
 
