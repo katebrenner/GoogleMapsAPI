@@ -19,7 +19,19 @@ INSERT INTO locations (name, address, lat, lng, venue_id) VALUES(
   'The Oculus', 'World Trade Center Transport Hub, Church St, New York, NY', 40.711399, -74.01114619999998, 6
 ),
 (
-  'General Assembly', '10 E 21st St, New York, USA', 40.7398848, -73.99008179999998, 10
+  'General Assembly', '10 E 21st St, New York, USA', 40.7398848, -73.99008179999998, 11
+),
+(
+  '&D''s House', '75-22 Parsons Blvd, Flushing, NY 11367, USA', 40.7258982 , -73.81097840000001, 2
+),
+(
+  'Bloomingdales', '504 Broadway, New York, NY 10012', 40.7217896, -73.99986690000003, 3
+),
+(
+  'ABC Carpet & Home', '881 Broadway, New York, NY 10003', 40.7384965, -73.99054869999998, 3
+),
+(
+  'Time Warner Center', '10 Columbus Cir, New York, NY 10019, USA', 40.7687596, -73.98320530000001, 10
 ),
 (
   'Chelsea Market', '75 9th Ave, New York, NY', 40.742171, -74.005092, 9
