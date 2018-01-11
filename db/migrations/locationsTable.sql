@@ -8,9 +8,6 @@ CREATE TABLE IF NOT EXISTS locations (
   address VARCHAR(80) NOT NULL,
   lat REAL NOT NULL,
   lng REAL NOT NULL,
-  type VARCHAR(30) NOT NULL
+  venue_id INTEGER REFERENCES venue(venue_id)
 );
 
-
-
--- ALTER TABLE movies ADD COLUMN director_id INTEGER;

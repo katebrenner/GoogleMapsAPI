@@ -1,60 +1,33 @@
 <%# views/map/new.ejs %>
-<html>
-  <head>
-    <link rel="stylesheet" href="/style.css">
-  </head>
-  <body>
+<% include ../partials/boilerplate %>
 <h1>Add a location</a></h1>
 
 <h1>this is new page </h1>
 
-    <div id="addressForm">
-      <input id="address" type="textbox" name ="address">
-      <input id="submit" type="button" value="Geocode">
-    </div>
 
-</form>
 <form id ="locationInfo" method='POST' action='/map'>
 <span> name: </span><input name = 'name' required><br>
-<span> address: <input name = 'address' required></span><br>
-<span> type: <input name = 'type' required></span><br>
+<span> address: <input name = 'address' required id = "address"></span><br>
+<select id='venue_id' name='venue_id'>
+  <% venue.forEach(venue => { %>
+    <option value="<%= venue.venue_id %>">
+      <%= `${venue.venue_type}` %>
+    </option>
+  <% }) %>
+</select>
 <input id = 'lat' name= 'lat' required>
 <input id = 'lng' name = 'lng' required>
 <input type='submit' value='Submit!'/>
 </form>
 
 
-
 <script>
-
-  function initMap() {
-let geocoder = new google.maps.Geocoder();
-
-document.getElementById('submit').addEventListener('click', function() {
-  geocodeAddress(geocoder);
-        });
-
-function geocodeAddress(geocoder) {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            document.getElementById('locationInfo').style.display = 'inherit';
-            document.getElementById('lat').value = (results[0].geometry.bounds.f.b + results[0].geometry.bounds.f.f)/2;
-            document.getElementById('lng').value = (results[0].geometry.bounds.b.b + results[0].geometry.bounds.b.f)/2;
-
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
-}
-
-
-
+  document.getElementById('address').value = "<%= address %>"
+  document.getElementById('lat').value = <%= latval %>;
+  document.getElementById('lng').value = <%= lngval %>;
 </script>
- <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk&callback=initMap">
-    </script>
+
   </body>
 </html>
+
 

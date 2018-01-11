@@ -1,23 +1,20 @@
 <%# views/map/index %>
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="/style.css">
-  </head>
-  <body>
-    <h3>WHERE 2 PEE NYC</h3>
-
+<% include ../partials/boilerplate %>
     <div id="map"></div>
     <div id="side">
-    <h1><a href ="/map/new"> Add PEE location!</a></h1
-    <form id="addressForm" action="/map/new">
-      <input id="address" type="textbox" value="Enter address here">
-      <input id="submit" type="button" value="Geocode">
+      <h1 class = "logo">
+      WHERE 2 PEE NYC <br>
+      <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/OMG_Face_Emoji_large.png?v=1480481054">
+      <img class ="emojiheader" src="https://emojipedia-us.s3.amazonaws.com/thumbs/320/apple/118/toilet_1f6bd.png">
+      <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Sweat_Water_Emoji_large.png?v=1480481042">
+      <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Poop_Emoji_7b204f05-eec6-4496-91b1-351acc03d2c7_large.png?v=1480481059">
+      <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_large.png?v=1480481059">
+    </h1>
+    <form id="addressForm" action="/map/search" method= "POST">
+      <input id="address" type="text" placeholder="Enter address here" name= 'address'>
+      <input type = 'submit'>
     </form>
-    <% for(i = 0; i < locations.length; i++) { %>
-      <p> <%= locations[i].name %></a> </p>
-      <p> <%= locations[i].address %> </p>
-  <% } %>
+
 
   </div>
 <script>
@@ -28,11 +25,18 @@
           center: position,
           mapTypeId: 'terrain'
         });
+
         let icon = {
         url: 'https://cdn.shopify.com/s/files/1/1061/1924/products/Poop_Emoji_7b204f05-eec6-4496-91b1-351acc03d2c7_large.png?v=1480481059',
         scaledSize: new google.maps.Size(25, 25)
       };
-         let locations = <%- JSON.stringify(locations) %>
+      //initiating the autocomplete %>
+      let input = document.getElementById('address');
+      var autocomplete = new google.maps.places.Autocomplete(input);
+
+      autocomplete.bindTo('bounds', map);
+        // this loop creates the icons, markers, and adds the list on the "side" panel %>
+        let locations = <%- JSON.stringify(locations) %>
           for(i = 0; i < locations.length; i++){
             let pooIcon = new google.maps.Marker({
             class: 'pooIcon',
@@ -45,25 +49,36 @@
               strong.innerHTML = locations[i].name;
               infowincontent.appendChild(strong);
               infowincontent.appendChild(document.createElement('br'));
-              var text = document.createElement('h2');
+              let text = document.createElement('h2');
               text.textContent = locations[i].address
               infowincontent.appendChild(text);
+              let venueType = document.createElement('p');
+              venueType.textContent = locations[i].venue_type;
+              infowincontent.appendChild(venueType)
               infowincontent.appendChild(document.createElement('br'));
               let button = document.createElement('a');
-              button.setAttribute('href', '/map/edit');
+              button.setAttribute('href', `map/${locations[i].id}/edit`);
               button.innerHTML = "edit";
               infowincontent.appendChild(button);
+              let h2 = document.createElement('h2');
+              h2.innerHTML = locations[i].name;
+              document.getElementById('side').appendChild(h2);
+              document.getElementById('side').appendChild(venueType)
               pooIcon.addListener('click', function() {
                 infoWindow.setContent(infowincontent);
                 infoWindow.open(map, pooIcon);
               });
-           }
 
-                  var geocoder = new google.maps.Geocoder();
+               h2.addEventListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, pooIcon);
+           })
 
-document.getElementById('submit').addEventListener('click', function() {
-  geocodeAddress(geocoder, map);
-        });
+         }
+
+    var geocoder = new google.maps.Geocoder();
+
+
 
 function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
@@ -82,10 +97,11 @@ function geocodeAddress(geocoder, resultsMap) {
         });
       }
     }
-</script>
 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk&callback=initMap">
-    </script>
-  </body>
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk&libraries=places&callback=initMap"
+        async defer></script>
+</body>
 </html>
