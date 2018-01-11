@@ -6,7 +6,6 @@
 
 mapController.index = (req, res) => {
   mapModel.findall().then( locations => {
-    console.log(locations[0].name);
     res.render('map/index', {
       locations: locations
     });
@@ -15,6 +14,9 @@ mapController.index = (req, res) => {
     res.status(500).json(err)
   })
 };
+
+
+
 
 
 mapController.new = (req, res) => {
@@ -60,8 +62,8 @@ mapController.create = (req, res) => {
 mapController.show = (req, res) => {
   mapModel.findById(req.params.id)
     .then(locations => {
-        venueModel.findById(locations.venue_id)
-          .then(venue => {
+      venueModel.findById(locations.venue_id)
+        .then(venue => {
             console.log('hi')
             res.render('map/show', { locations: locations, venue: venue })
           })
@@ -75,9 +77,11 @@ mapController.show = (req, res) => {
 mapController.edit = (req,res) => {
   mapModel.findById(req.params.id)
     .then(locations => {
-      res.render('map/edit', {
-        locations: locations
-      })
+      venueModel.findall()
+      .then(venue => res.render('map/edit', {
+        locations: locations,
+        venue: venue
+      }))
     })
     .catch(err => {
       res.status(400).json(err)
@@ -86,10 +90,11 @@ mapController.edit = (req,res) => {
 
 mapController.update = (req, res) => {
   mapModel.update({
-    name: req.body.name
+    name: req.body.name,
+    venue_id: req.body.venue_id
   }, req.params.id)
   .then(() => {
-    res.redirect('/')
+    res.redirect('/map')
   })
   .catch(err => {
     console.log(err)

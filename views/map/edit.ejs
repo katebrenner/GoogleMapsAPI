@@ -1,13 +1,25 @@
 <h1> edit page </h1>
 <%# views/map/edit.ejs %>
+<% include ../partials/boilerplate %>
 
 <form action="<%= `/map/${locations.id}?_method=PUT` %>" method="POST">
   <label for="name">Name</label>
   <input id="title" type="text" name="name" value="<%= locations.name %>" />
 
   <br />
+<label for='venue_id'>Venue</label>
+<select id='venue_id' name='venue_id'>
+  <% venue.forEach(venue => { %>
+    <option
+      value="<%= venue.venue_id %>"
+      <%= locations.venue_id === venue.venue_id ? 'selected' : null %>
+      >
+      <%= venue.venue_type %>
+    </option>
+  <% }) %>
+</select>
+    <input type="submit" value="Save changes" />
 
-  <input type="submit" value="Save changes" />
 </form>
 
 <form action="<%= `/map/${locations.id}?_method=DELETE` %>" method="POST">

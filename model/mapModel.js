@@ -2,7 +2,7 @@ const db = require('../db/config');
 const mapModel = {}
 
 mapModel.findall = () => {
-  return db.query('SELECT * FROM locations ORDER BY lng DESC')
+  return db.query('SELECT * FROM locations JOIN venue ON locations.venue_id = venue.venue_id ORDER BY lng DESC')
 }
 
 
@@ -25,10 +25,10 @@ mapModel.update = (locations, id) => {
   return db.none(
     `
     UPDATE locations SET
-    name = $1
-    WHERE id = $2
+    name = $1, venue_id = $2
+    WHERE id = $3
    `,
-    [locations.name, id]
+    [locations.name, locations.venue_id, id]
     );
 };
 
