@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS locations (
   address VARCHAR(80) NOT NULL,
   lat REAL NOT NULL,
   lng REAL NOT NULL,
+  -- hrs VARCHAR(255),
   venue_id INTEGER REFERENCES venue(venue_id)
 );
 

@@ -15,10 +15,6 @@ mapController.index = (req, res) => {
   })
 };
 
-
-
-
-
 mapController.new = (req, res) => {
   venueModel.findall()
     .then(venue => {
@@ -26,21 +22,60 @@ mapController.new = (req, res) => {
       method: 'get',
       url: `https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.address}&key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk` })
     .then( data => {
-     console.log('got this back data from axios', data.data.results[0].geometry.location.lat)
-      res.render('map/new', {
-        data: data,
+      let place_id = data.data.results[0].place_id;
+      console.log(place_id)
+      axios ({
+        method: 'get',
+        url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk`
+      }).then ( placesData => {
+       res.render('map/new', {
+        hours: placesData.result,
         latval: data.data.results[0].geometry.location.lat,
         lngval: data.data.results[0].geometry.location.lng,
         address: data.data.results[0].formatted_address,
         venue: venue
-      })
+      });console.log(placesData)
     })
   })
     .catch(err => {
       console.log(err)
       res.status(400).send('error');
     });
+  });
 };
+
+
+
+
+// mapController.new = (req, res) => {
+//   venueModel.findall()
+//     .then(venue => {
+//       axios({
+//       method: 'get',
+//       url: `https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.address}&key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk` })
+//     .then( data => {
+//       let place_id = data.data.results[0].place_id;
+//      console.log('got this back data from axios', data.data.results[0].place_id)
+//       res.render('map/new', {
+//         data: data,
+//         latval: data.data.results[0].geometry.location.lat,
+//         lngval: data.data.results[0].geometry.location.lng,
+//         address: data.data.results[0].formatted_address,
+//         venue: venue
+//       })
+//       axios ({
+//         method: 'get',
+//         url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk`
+//       }).then ( placesData => {
+//         hours: placesData.result.opening_hours.weekday_text
+//       })
+//     })
+//   })
+//     .catch(err => {
+//       console.log(err)
+//       res.status(400).send('error');
+//     });
+// };
 
 
 mapController.create = (req, res) => {

@@ -84,7 +84,7 @@ function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
-            console.log(results[0].geometry.bounds.b);
+            console.log(results[0]);
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
               map: resultsMap,
@@ -103,5 +103,6 @@ function geocodeAddress(geocoder, resultsMap) {
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk&libraries=places&callback=initMap"
         async defer></script>
+
 </body>
 </html>
