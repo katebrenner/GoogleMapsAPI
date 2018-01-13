@@ -3,7 +3,7 @@
 
     <div id="map"></div>
 
-    <nav id="side">
+    <nav id="side" >
       <h1 class = "logo">
       WHERE 2 PEE NYC <br>
       <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/OMG_Face_Emoji_large.png?v=1480481054">
@@ -47,32 +47,36 @@
               let infoWindow = new google.maps.InfoWindow;
               infoWindow.className = "infoWindow";
               let infowincontent = document.createElement('div');
-              let h1 = document.createElement('h1');
-              h1.innerHTML = locations[i].name;
-              infowincontent.appendChild(h1);
+              let h2 = document.createElement('h2');
+              h2.innerHTML = locations[i].name;
+              infowincontent.appendChild(h2);
               infowincontent.appendChild(document.createElement('br'));
-              let text = document.createElement('h2');
-              text.textContent = locations[i].address
-              infowincontent.appendChild(text);
               let venueType = document.createElement('h4');
               venueType.textContent = locations[i].venue_type;
-              console.log(venueType)
               infowincontent.appendChild(venueType);
+              let text = document.createElement('p');
+              text.textContent = locations[i].address
+              infowincontent.appendChild(text);
               infowincontent.appendChild(document.createElement('br'));
               let button = document.createElement('a');
               button.setAttribute('href', `map/${locations[i].id}/edit`);
               button.innerHTML = "edit";
               infowincontent.appendChild(button);
-              let h2 = document.createElement('h2');
-              h2.innerHTML = locations[i].name;
-              document.getElementById('side').appendChild(h2);
-              document.getElementById('side').appendChild(venueType);
+              let nameSide = document.createElement('h2');
+              nameSide.innerHTML = locations[i].name;
+              let venueTypeSide = document.createElement('h4');
+              venueTypeSide.textContent = locations[i].venue_type;
+              let addressSide = document.createElement('p');
+              addressSide.innerHTML = locations[i].address;
+              document.getElementById('side').appendChild(nameSide);
+              document.getElementById('side').appendChild(venueTypeSide);
+              document.getElementById('side').appendChild(addressSide);
               pooIcon.addListener('click', function() {
                 infoWindow.setContent(infowincontent);
                 infoWindow.open(map, pooIcon);
               });
 
-               h2.addEventListener('click', function() {
+               nameSide.addEventListener('click', function() {
                 infoWindow.setContent(infowincontent);
                 infoWindow.open(map, pooIcon);
            })
@@ -107,6 +111,7 @@ let side = document.getElementById('side')
     navButton.addEventListener('click', function() {
       side.style.display = 'inherit';
       side.style.width = '100%';
+      map.style.display = "none";
     })
 
 let mapButton = document.getElementById('showMap');
@@ -117,8 +122,33 @@ let map = document.getElementById('map')
       side.style.display = 'none';
     })
 
+// did the below so that it is responsive if someone happens to be resizing on their comp
+window.addEventListener('resize', function() {
+  if (window.innerWidth < 500) {
+    map.style.display = 'inherit';
+    side.style.display = 'none';
+    map.style.width = '100%';
+    map.style.left = 0;
+  }
+  else if (window.innerWidth > 500 && window.innerWidth < 1024) {
+      console.log('working')
+    map.style.display = 'inherit';
+    side.style.display = 'inherit';
+    map.style.width = '50%';
+    side.style.width = '50%';
+    map.style.left = '50%';
+    side.style.left = '0';
+  }
+  else if (window.innerWidth > 1024) {
+    map.style.display = 'inherit';
+    side.style.display = 'inherit';
+    map.style.width = '75%';
+    side.style.width = '25%';
+    map.style.left = '25%';
+    side.style.left = '0';
+  }
 
-
+})
 
 
 

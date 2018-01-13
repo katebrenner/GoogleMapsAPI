@@ -28,7 +28,7 @@
   top: 0;
   background-color: white;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
-  display: inherit;
+/*  display: inherit;*/
 }
 
 #map {
@@ -84,8 +84,41 @@ h3 {
   #map {
     width: 100%;
     left: 0;
+    display: inherit;
   }
   #side {
+    width: 100%;
     display: none;
   }
 }
+
+@media (min-width: 501px) {
+  #map {
+    width: 50%;
+    left: 50%;
+    display: inherit;
+  }
+  #side {
+    width: 50%;
+    left: 0;
+    display: inherit;
+  }
+
+}
+
+
+@media (min-width: 1024px) {
+
+  #map {
+    width: 75%;
+    left: 25%;
+    display: inherit;
+  }
+  #side {
+    width: 25%;
+    left: 0;
+    display: inherit;
+  }
+}
+
+
