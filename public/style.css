@@ -12,23 +12,33 @@
   width: 75%;
 }
 
-#side {
-  width: 25%;
-  height: 100%;
-  overflow: scroll;
+.gm-style-iw {
+  background-color: pink;
   z-index: 1;
+  font-family: 'Bungee', cursive;
+  text-align: center;
+}
+
+#side {
+  height: 100%;
+  width: 25%;
+  overflow: scroll;
   position: fixed;
   left: 0;
   top: 0;
   background-color: white;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
+  display: inherit;
 }
 
 #map {
   height: 100%;
-  width: 100%;
+  width: 75%;
+  position: absolute;
+  left: 25%;
   margin: 0 auto;
   border: 1px solid black;
+  display: inherit;
 }
 
 html, body {
@@ -49,4 +59,33 @@ h3 {
 
 #lat, #lng {
   display: none;
+}
+
+#showMap, #showNav {
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  display: none;
+}
+
+#showMap {
+ left: 50%;
+}
+
+
+#showNav {
+ left: 0;
+}
+
+@media (max-width: 500px) {
+  #showMap, #showNav {
+    display: inherit;
+  }
+  #map {
+    width: 100%;
+    left: 0;
+  }
+  #side {
+    display: none;
+  }
 }

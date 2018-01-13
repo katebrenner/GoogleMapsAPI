@@ -1,5 +1,11 @@
-    console.log('connected')
+// $(document).ready(function() {
+//       console.log('connected')
+//   $("#sidebar-toggle").click(function(e) {
+//     e.preventDefault();
+//     $("#wrapper").toggleClass("toggled");
+// });
 
+// });
 //       function initMap() {
 //         var position = {lat: 40.7525703, lng: -73.9776273};
 //         var map = new google.maps.Map(document.getElementById('map'), {

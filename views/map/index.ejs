@@ -1,7 +1,9 @@
 <%# views/map/index %>
 <% include ../partials/boilerplate %>
+
     <div id="map"></div>
-    <div id="side">
+
+    <nav id="side">
       <h1 class = "logo">
       WHERE 2 PEE NYC <br>
       <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/OMG_Face_Emoji_large.png?v=1480481054">
@@ -14,14 +16,13 @@
       <input id="address" type="text" placeholder="Enter address here" name= 'address'>
       <input type = 'submit'>
     </form>
-
-
-  </div>
+  </nav>
+  <button id="showNav">List View</button><button id="showMap">Map View</button>
 <script>
         function initMap() {
-        var position = {lat: 40.7525703, lng: -73.9776273};
+        var position = {lat: 40.758618, lng: -73.98622};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
+          zoom: 13,
           center: position,
           mapTypeId: 'terrain'
         });
@@ -44,17 +45,19 @@
              map: map,
              icon: icon })
               let infoWindow = new google.maps.InfoWindow;
+              infoWindow.className = "infoWindow";
               let infowincontent = document.createElement('div');
-              let strong = document.createElement('strong');
-              strong.innerHTML = locations[i].name;
-              infowincontent.appendChild(strong);
+              let h1 = document.createElement('h1');
+              h1.innerHTML = locations[i].name;
+              infowincontent.appendChild(h1);
               infowincontent.appendChild(document.createElement('br'));
               let text = document.createElement('h2');
               text.textContent = locations[i].address
               infowincontent.appendChild(text);
-              let venueType = document.createElement('p');
+              let venueType = document.createElement('h4');
               venueType.textContent = locations[i].venue_type;
-              infowincontent.appendChild(venueType)
+              console.log(venueType)
+              infowincontent.appendChild(venueType);
               infowincontent.appendChild(document.createElement('br'));
               let button = document.createElement('a');
               button.setAttribute('href', `map/${locations[i].id}/edit`);
@@ -63,7 +66,7 @@
               let h2 = document.createElement('h2');
               h2.innerHTML = locations[i].name;
               document.getElementById('side').appendChild(h2);
-              document.getElementById('side').appendChild(venueType)
+              document.getElementById('side').appendChild(venueType);
               pooIcon.addListener('click', function() {
                 infoWindow.setContent(infowincontent);
                 infoWindow.open(map, pooIcon);
@@ -99,8 +102,30 @@ function geocodeAddress(geocoder, resultsMap) {
     }
 
 
+let navButton = document.getElementById('showNav');
+let side = document.getElementById('side')
+    navButton.addEventListener('click', function() {
+      side.style.display = 'inherit';
+      side.style.width = '100%';
+    })
+
+let mapButton = document.getElementById('showMap');
+let map = document.getElementById('map')
+    mapButton.addEventListener('click', function() {
+      map.style.display = 'inherit';
+      map.style.width = '100%';
+      side.style.display = 'none';
+    })
+
+
+
+
+
 
 </script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk&libraries=places&callback=initMap"
         async defer></script>
 
