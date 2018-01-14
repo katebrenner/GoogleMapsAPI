@@ -1,126 +1,145 @@
 <%# views/map/index %>
 <% include ../partials/boilerplate %>
 
-    <div id="map"></div>
+<div id="map"></div>
+<nav id="side" >
+  <h1 class = "logo">
+    WHERE 2 PEE NYC <br>
+    <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/OMG_Face_Emoji_large.png?v=1480481054">
+    <img class ="emojiheader" src="https://emojipedia-us.s3.amazonaws.com/thumbs/320/apple/118/toilet_1f6bd.png">
+    <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Sweat_Water_Emoji_large.png?v=1480481042">
+    <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Poop_Emoji_7b204f05-eec6-4496-91b1-351acc03d2c7_large.png?v=1480481059">
+    <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_large.png?v=1480481059">
+  </h1>
+  <form id="addressForm" action="/map/search" method= "POST">
+    <input id="address" type="text" placeholder="Enter address here" name= 'address'>
+    <input type = 'submit'>
+  </form>
+</nav>
+<button id="showNav">List View</button><button id="showMap">Map View</button>
 
-    <nav id="side" >
-      <h1 class = "logo">
-      WHERE 2 PEE NYC <br>
-      <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/OMG_Face_Emoji_large.png?v=1480481054">
-      <img class ="emojiheader" src="https://emojipedia-us.s3.amazonaws.com/thumbs/320/apple/118/toilet_1f6bd.png">
-      <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Sweat_Water_Emoji_large.png?v=1480481042">
-      <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Poop_Emoji_7b204f05-eec6-4496-91b1-351acc03d2c7_large.png?v=1480481059">
-      <img class ="emojiheader" src="https://cdn.shopify.com/s/files/1/1061/1924/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_large.png?v=1480481059">
-    </h1>
-    <form id="addressForm" action="/map/search" method= "POST">
-      <input id="address" type="text" placeholder="Enter address here" name= 'address'>
-      <input type = 'submit'>
-    </form>
-  </nav>
-  <button id="showNav">List View</button><button id="showMap">Map View</button>
 <script>
-        function initMap() {
-        var position = {lat: 40.758618, lng: -73.98622};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: position,
-          mapTypeId: 'terrain'
-        });
+  function initMap() {
+    var position = {lat: 40.758618, lng: -73.98622};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 13,
+      center: position,
+      mapTypeId: 'terrain'
+    });
+    let icon = {
+      url: 'https://cdn.shopify.com/s/files/1/1061/1924/products/Poop_Emoji_7b204f05-eec6-4496-91b1-351acc03d2c7_large.png?v=1480481059',
+      scaledSize: new google.maps.Size(25, 25)
+    };
+    //initiating the autocomplete %>
+    let input = document.getElementById('address');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.bindTo('bounds', map);
 
-        let icon = {
-        url: 'https://cdn.shopify.com/s/files/1/1061/1924/products/Poop_Emoji_7b204f05-eec6-4496-91b1-351acc03d2c7_large.png?v=1480481059',
-        scaledSize: new google.maps.Size(25, 25)
-      };
-      //initiating the autocomplete %>
-      let input = document.getElementById('address');
-      var autocomplete = new google.maps.places.Autocomplete(input);
-
-      autocomplete.bindTo('bounds', map);
         // this loop creates the icons, markers, and adds the list on the "side" panel %>
-        let locations = <%- JSON.stringify(locations) %>
-          for(i = 0; i < locations.length; i++){
-            let pooIcon = new google.maps.Marker({
-            class: 'pooIcon',
-             position: {lat: locations[i].lat, lng: locations[i].lng},
-             map: map,
-             icon: icon })
-              let infoWindow = new google.maps.InfoWindow;
-              infoWindow.className = "infoWindow";
-              let infowincontent = document.createElement('div');
-              let h2 = document.createElement('h2');
-              h2.innerHTML = locations[i].name;
-              infowincontent.appendChild(h2);
-              infowincontent.appendChild(document.createElement('br'));
-              let venueType = document.createElement('h4');
-              venueType.textContent = locations[i].venue_type;
-              infowincontent.appendChild(venueType);
-              let text = document.createElement('p');
-              text.textContent = locations[i].address
-              infowincontent.appendChild(text);
-              infowincontent.appendChild(document.createElement('br'));
-              let button = document.createElement('a');
-              button.setAttribute('href', `map/${locations[i].id}/edit`);
-              button.innerHTML = "edit";
-              infowincontent.appendChild(button);
-              let nameSide = document.createElement('h2');
-              nameSide.innerHTML = locations[i].name;
-              let venueTypeSide = document.createElement('h4');
-              venueTypeSide.textContent = locations[i].venue_type;
-              let addressSide = document.createElement('p');
-              addressSide.innerHTML = locations[i].address;
-              document.getElementById('side').appendChild(nameSide);
-              document.getElementById('side').appendChild(venueTypeSide);
-              document.getElementById('side').appendChild(addressSide);
-              pooIcon.addListener('click', function() {
-                infoWindow.setContent(infowincontent);
-                infoWindow.open(map, pooIcon);
-              });
-
-               nameSide.addEventListener('click', function() {
-                infoWindow.setContent(infowincontent);
-                infoWindow.open(map, pooIcon);
-           })
-
-         }
-
-    var geocoder = new google.maps.Geocoder();
-
-
-
-function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            console.log(results[0]);
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location,
-              icon: icon
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
+    let locations = <%- JSON.stringify(locations) %>
+    for(i = 0; i < locations.length; i++){
+      let pooIcon = new google.maps.Marker({
+        class: 'pooIcon',
+        position: {lat: locations[i].lat, lng: locations[i].lng},
+        map: map,
+        icon: icon })
+      let infoWindow = new google.maps.InfoWindow;
+      infoWindow.className = "infoWindow";
+      let infowincontent = document.createElement('div');
+      let h2 = document.createElement('h2');
+      h2.innerHTML = locations[i].name;
+      infowincontent.appendChild(h2);
+      infowincontent.appendChild(document.createElement('br'));
+      let venueType = document.createElement('h4');
+      venueType.textContent = locations[i].venue_type;
+      infowincontent.appendChild(venueType);
+      let text = document.createElement('p');
+      text.textContent = locations[i].address
+      infowincontent.appendChild(text);
+      infowincontent.appendChild(document.createElement('br'));
+      let button = document.createElement('a');
+      button.setAttribute('href', `map/${locations[i].id}/edit`);
+      button.innerHTML = "edit";
+      infowincontent.appendChild(button);
+      let nameSide = document.createElement('h2');
+      nameSide.innerHTML = locations[i].name;
+      let venueTypeSide = document.createElement('h4');
+      venueTypeSide.textContent = locations[i].venue_type;
+      let addressSide = document.createElement('p');
+      addressSide.innerHTML = locations[i].address;
+      document.getElementById('side').appendChild(nameSide);
+      document.getElementById('side').appendChild(venueTypeSide);
+      document.getElementById('side').appendChild(addressSide);
+      pooIcon.addListener('click', function() {
+      infoWindow.setContent(infowincontent);
+      infoWindow.open(map, pooIcon);
+    });
+      nameSide.addEventListener('click', function() {
+        infoWindow.setContent(infowincontent);
+        infoWindow.open(map, pooIcon);
+      })
     }
+    infoWindow = new google.maps.InfoWindow;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('You are here. Good Luck!');
+        infoWindow.open(map);
+        map.setCenter(pos);
+      },
+      function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+          // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+  }
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+  infoWindow.open(map);
+}
+  var geocoder = new google.maps.Geocoder();
+  function geocodeAddress(geocoder, resultsMap) {
+    let address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        console.log(results[0]);
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location,
+          icon: icon
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+}
 
 
 let navButton = document.getElementById('showNav');
 let side = document.getElementById('side')
-    navButton.addEventListener('click', function() {
-      side.style.display = 'inherit';
-      side.style.width = '100%';
-      map.style.display = "none";
-    })
+navButton.addEventListener('click', function() {
+  side.style.display = 'inherit';
+  side.style.width = '100%';
+  map.style.display = "none";
+})
 
 let mapButton = document.getElementById('showMap');
-let map = document.getElementById('map')
-    mapButton.addEventListener('click', function() {
-      map.style.display = 'inherit';
-      map.style.width = '100%';
-      side.style.display = 'none';
-    })
+let map = document.getElementById('map');
+mapButton.addEventListener('click', function() {
+  map.style.display = 'inherit';
+  map.style.width = '100%';
+  side.style.display = 'none';
+})
 
 // did the below so that it is responsive if someone happens to be resizing on their comp
 window.addEventListener('resize', function() {
@@ -131,7 +150,7 @@ window.addEventListener('resize', function() {
     map.style.left = 0;
   }
   else if (window.innerWidth > 500 && window.innerWidth < 1024) {
-      console.log('working')
+    console.log('working')
     map.style.display = 'inherit';
     side.style.display = 'inherit';
     map.style.width = '50%';
@@ -147,12 +166,10 @@ window.addEventListener('resize', function() {
     map.style.left = '25%';
     side.style.left = '0';
   }
-
 })
 
-
-
 </script>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
