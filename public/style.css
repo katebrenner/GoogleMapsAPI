@@ -13,9 +13,8 @@
 }
 
 .gm-style-iw {
-  background-color: pink;
   z-index: 1;
-  font-family: 'Bungee', cursive;
+/*  font-family: 'Bungee', cursive;*/
   text-align: center;
 }
 
@@ -28,7 +27,20 @@
   top: 0;
   background-color: white;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
-/*  display: inherit;*/
+  text-align: center;
+}
+
+input {
+  border-radius: 5px;
+}
+
+.addressSide {
+  border-bottom: 2px solid black;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.nameSide:hover {
+ color: grey;
 }
 
 #map {
@@ -45,8 +57,8 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: grey;
-  font-family: 'Bungee', cursive;
+  background-color: #aaccfb;
+  font-family: 'Roboto Slab', serif;
 }
 
 h3 {
@@ -75,6 +87,11 @@ h3 {
 
 #showNav {
  left: 0;
+}
+
+.edit {
+  margin: 0 auto;
+  text-align: center;
 }
 
 @media (max-width: 500px) {

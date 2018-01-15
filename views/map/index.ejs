@@ -63,10 +63,12 @@
       infowincontent.appendChild(button);
       let nameSide = document.createElement('h2');
       nameSide.innerHTML = locations[i].name;
+      nameSide.className = 'nameSide';
       let venueTypeSide = document.createElement('h4');
       venueTypeSide.textContent = locations[i].venue_type;
       let addressSide = document.createElement('p');
       addressSide.innerHTML = locations[i].address;
+      addressSide.className = 'addressSide';
       document.getElementById('side').appendChild(nameSide);
       document.getElementById('side').appendChild(venueTypeSide);
       document.getElementById('side').appendChild(addressSide);
