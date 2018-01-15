@@ -18,6 +18,8 @@ You are **responsible** for scheduling time with your squad to seek approval for
 
 Use this section to describe your final project and perhaps any links to relevant sites that help convey the concept and\or functionality.
 
+WHERE 2 PEE NYC stores information about public restrooms throughout NYC.  Its CRUD functionality allows users to store their own bathrooms that they may come across.  It uses 2 tables- a locations table that stores name, address, lat & long (needed to render the icons to the map), and venue_id that reference the venues table. that joins witha venues table
+
 ## Priority Matrix
 
 Include a full list of features that have been prioritized based on the `Time and Importance` Matix. 
@@ -72,14 +74,20 @@ Time frames are also key in the development cycle.  You have limited time to cod
 
 | Component | Priority | Estimated Time | Time Invetsted | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
-| Component 1 | H | 10hrs| 12hrs | 12hrs |
+|  2 joined tables | H | 5hrs| 5hrs | 5hrs |
+|  Render locations from table | H | 8hrs| 8hrs | 8hrs |
+|  Crud functionality | H | 12hrs| 12hrs | 12hrs |
+|  Autocomplete | M | 5hrs| 5hrs | 5hrs |
+|  location detection | M | 5hrs| 2hrs | 2hrs |
+|  Places API for location hours(didn't use) | L | 5hrs| 5hrs | 5hrs |
+|  User Auth(in progress- hours logged so far) | L | 15hrs| 5hrs | 5hrs |
 
 ## Helper Functions
 Helper functions should be generic enought that they can be reused in other applications. Use this section to document all helper functions that fall into this category.
 
 | Function | Description | 
 | --- | :---: |  
-| Capitalize | This will capitalize the first letter in a string | 
+| JSON.stringify() | Turns javascript value into JSON string - needed this to loop thruogh locations table in script| 
 
 ## Additional Libraries
  Use this section to list all supporting libraries and thier role in the project. 
@@ -113,6 +121,7 @@ At first I tried creating a separate javascript file, but then I realized that t
  Use this section to document what changes were made and the reasoning behind those changes.  
  - I wanted to use a css framework to make the page responsive, but instead I wrote out the code so I had more control over it
 
+ 
 ## Issues and Resolutions
  Use this section to list of all major issues encountered and their resolution.
  -couldn't get icons to render when in a separate script file, so ended up moving them to a script tag within the ejs file. 
