@@ -5,29 +5,27 @@ const override = require('method-override');
 const path = require('path');
 const bodyParser = require('body-parser');
 const router = require('./routes/map-routes')
+//requiring auth stuff
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const passport = require('passport');
+const authHelpers = require('./services/auth/auth-helpers');
+const authRouter = require('./routes/auth-routes');
+
 const PORT = process.env.PORT || 3000;
 
-//auth stuff below
 require('dotenv').config();
 
-const cookieParser = require('cookie-parser');
 app.use(cookieParser());
-
-const session = require('express-session');
+app.use(bodyParser());
 app.use(session({
   secret: process.env.SESSION_KEY,
   resave: false,
   saveUninitialized: true,
 }));
-
-const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
-
-const authRouter = require('./routes/auth-routes');
 app.use('/auth', authRouter);
-
-const authHelpers = require('./services/auth/auth-helpers');
 app.use(authHelpers.loginRequired)
 //end auth stuff
 
@@ -35,7 +33,7 @@ app.use(morgan('dev'));
 
 app.use(override('_method'));
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
