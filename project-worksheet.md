@@ -87,6 +87,11 @@ Helper functions should be generic enought that they can be reused in other appl
 ## Code Snippet
 
 Use this section to include a brief code snippet of functionality that you are proud of an a brief description.  
+
+The below is part of a larger function that creates the map.
+I was very concerned with how I would pull lat and long from the table and render it to the map.
+I had to include a script tag in my index page. 
+At first I tried creating a separate javascript file, but then I realized that the data being returned from my controller was being sent to my ejs, but not my script.js, so I compiled it all onto the same page, with a script tag on my ejs. 
 ```let locations = <%- JSON.stringify(locations) %>
     for(i = 0; i < locations.length; i++){
       let pooIcon = new google.maps.Marker({
@@ -106,10 +111,15 @@ Use this section to include a brief code snippet of functionality that you are p
 
 ## Change Log
  Use this section to document what changes were made and the reasoning behind those changes.  
+ - I wanted to use a css framework to make the page responsive, but instead I wrote out the code so I had more control over it
 
 ## Issues and Resolutions
  Use this section to list of all major issues encountered and their resolution.
-
+ -couldn't get icons to render when in a separate script file, so ended up moving them to a script tag within the ejs file. 
+- error: syntax error at or near "BY"
+- solution: SELECT * FROM locations OBRDER BY lng -> SELECT * FROM locations OBRDER BY lng DESC
+- couldn't get edit page to default to the location's venue based on its venue id
+- solution: <%= locations.venue_id === venue.venue_id ? 'selected' : null %>
 #### SAMPLE.....
 **ERROR**: app.js:34 Uncaught SyntaxError: Unexpected identifier                                
 **RESOLUTION**: Missing comma after first object in sources {} object
