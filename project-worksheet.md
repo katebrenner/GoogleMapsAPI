@@ -32,12 +32,14 @@ Include the full list of features that will be part of your MVP
 - Google maps API that renders map and pulls lat and long from locations table and renders to map
 - Crud functionality allowing user to add locations
 ## POST MVP
+Include the full list of features that you are considering for POST MVP
+
 - Google autocomplete for addresses
+- Google location detection
 - User Auth
 - Have all CRUD functionality one page so user doesn't have to leave page
 - Have user be able to upload pics
 
-Include the full list of features that you are considering for POST MVP
 
 ## Wireframes
 
@@ -85,9 +87,22 @@ Helper functions should be generic enought that they can be reused in other appl
 ## Code Snippet
 
 Use this section to include a brief code snippet of functionality that you are proud of an a brief description.  
+```let locations = <%- JSON.stringify(locations) %>
+    for(i = 0; i < locations.length; i++){
+      let pooIcon = new google.maps.Marker({
+        class: 'pooIcon',
+        position: {lat: locations[i].lat, lng: locations[i].lng},
+        map: map,
+        icon: icon })```
 
 ## jQuery Discoveries
  Use this section to list some, but not all, of the jQuery methods and\or functionality discovered while working on this project.
+
+ I used no jQuery.  The google maps documentation and built in functions were all in plain javascripy.  I did not want to mix the two.  If anything, it was a good refresher in manipulating ther DOM with javascipt.  A list of some javascript DOM manipulation that I used is below:
+ -document.createElement('p');
+ - element.innerHTML = 'text';
+ - element.className = 'classname';
+ - document.getElementById('side').appendChild(child);
 
 ## Change Log
  Use this section to document what changes were made and the reasoning behind those changes.  
