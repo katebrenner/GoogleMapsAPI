@@ -98,7 +98,7 @@ At first I tried creating a separate javascript file, but then I realized that t
         class: 'pooIcon',
         position: {lat: locations[i].lat, lng: locations[i].lng},
         map: map,
-        icon: icon })
+        icon: icon })```
 
 ## jQuery Discoveries
  Use this section to list some, but not all, of the jQuery methods and\or functionality discovered while working on this project.
