@@ -5,9 +5,11 @@
 
 
 mapController.index = (req, res) => {
+  console.log(req.user)
   mapModel.findall().then( locations => {
     res.render('map/index', {
-      locations: locations
+      locations: locations,
+      user: req.user
     });
   }).catch(err => {
     console.log(err);

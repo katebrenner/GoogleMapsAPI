@@ -49,6 +49,12 @@ app.get('/', (req, res) => {
   res.send('landing page');
 });
 
+// app.get('/logout', function(req,res) => {
+//   req.logout();
+//   res.redirect('/map');
+//   console.log('logout');
+// })
+
 
 
 app.use('/map', router);
