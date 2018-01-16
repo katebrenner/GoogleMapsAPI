@@ -139,6 +139,9 @@ At first I tried creating a separate javascript file, but then I realized that t
 - solution: SELECT * FROM locations OBRDER BY lng -> SELECT * FROM locations OBRDER BY lng DESC
 - couldn't get edit page to default to the location's venue based on its venue id
 - solution: <%= locations.venue_id === venue.venue_id ? 'selected' : null %>
+- App was adaptive  but not responsive, so added event listeners on window resizing, just in case you are the 0.5% that likes to resize your browser while on a site
+- Not resolved- deployment
+
 #### SAMPLE.....
 **ERROR**: app.js:34 Uncaught SyntaxError: Unexpected identifier                                
 **RESOLUTION**: Missing comma after first object in sources {} object
