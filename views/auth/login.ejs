@@ -1,10 +1,37 @@
 <%# views/auth/login.ejs %>
-<% include ../partials/boilerplate %>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="/authstyle.css">
+  </head>
+  <body>
+
+<style>
+#login {
+  text-align: center;
+  margin: 0 auto;
+}
+
+a{
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+body {
+  background-color: #aaccfb;
+  font-family: 'Roboto Slab', serif;
+}
+
+input {
+  border-radius: 5px;
+}
+</style>
 
 <form id = 'login' method="POST" action="/auth/login">
-  <input name="username" type="text" placeholder="username" required />
+  <input name="username" type="text" placeholder="username" required /><br>
   <input name="password" type="password" placeholder="password" required />
   <input type="submit" value="Log in!" />
 </form>
 
 <a href="/auth/register">Register Here</a>
+</body>

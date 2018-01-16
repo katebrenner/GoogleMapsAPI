@@ -4,6 +4,11 @@
   text-align: center;
 }
 
+#login {
+  text-align: center;
+  margin: 0 auto;
+}
+
 .logout {
   position: absolute;
   z-index: 1;
@@ -21,7 +26,6 @@
 
 .gm-style-iw {
   z-index: 1;
-/*  font-family: 'Bungee', cursive;*/
   text-align: center;
 }
 
@@ -70,10 +74,6 @@ html, body {
 
 h3 {
   text-align: center;
-}
-
-#locationInfo{
-  /*display: none;*/
 }
 
 #lat, #lng {

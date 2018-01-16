@@ -1,0 +1,24 @@
+
+a{
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+body {
+  background-color: #aaccfb;
+  font-family: 'Roboto Slab', serif;
+}
+
+form {
+  text-align: center;
+  margin: 0 auto;
+}
+
+body{
+  background-color: #aaccfb;
+  font-family: 'Roboto Slab', serif;
+}
+
+input {
+  border-radius: 5px;
+}

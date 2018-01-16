@@ -1,17 +1,19 @@
+// requiring modules
 const express = require('express');
 const app = express()
 const morgan = require('morgan');
 const override = require('method-override');
 const path = require('path');
 const bodyParser = require('body-parser');
-const router = require('./routes/map-routes')
 //requiring auth stuff
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const authHelpers = require('./services/auth/auth-helpers');
+//requiring routers
+const router = require('./routes/map-routes')
 const authRouter = require('./routes/auth-routes');
-
+//setting up port on local host 3000
 const PORT = process.env.PORT || 3000;
 
 require('dotenv').config();
@@ -27,36 +29,22 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', authRouter);
 app.use(authHelpers.loginRequired)
-//end auth stuff
-
 app.use(morgan('dev'));
-
 app.use(override('_method'));
-
-// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-// set to nothing in express object, so you are setting it to views
+// currently set to nothing in express object,
+//so we are setting it to views
 app.set('views', path.join(__dirname, 'views'));
-//go into some other file
+//use 'public' for static files
 app.use(express.static(__dirname + '/public'));
-
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.send('landing page');
+  res.redirect('/map');
 });
-
-// app.get('/logout', function(req,res) => {
-//   req.logout();
-//   res.redirect('/map');
-//   console.log('logout');
-// })
-
-
-
 app.use('/map', router);
 
 app.listen(PORT, () => {

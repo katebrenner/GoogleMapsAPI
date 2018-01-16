@@ -18,7 +18,7 @@ You are **responsible** for scheduling time with your squad to seek approval for
 
 Use this section to describe your final project and perhaps any links to relevant sites that help convey the concept and\or functionality.
 
-WHERE 2 PEE NYC stores information about public restrooms throughout NYC.  Its CRUD functionality allows users to store their own bathrooms that they may come across.  It uses 2 tables- a locations table that stores name, address, lat & long (needed to render the icons to the map), and venue_id that reference the venues table. that joins witha venues table
+Where 2 Pee NYC stores information about public restrooms throughout NYC.  Its CRUD functionality allows users to store additional restrooms to the database.  It uses 2 tables- a locations table that stores name, address, lat & long (needed to render the icons to the map), and venue_id, which reference the venues table. This app uses the google maps API to obtain latitude and longitude, and formatted address- which is then stored to the table.  It also utilises google maps’ autocomplete and location services.  The app uses passport for user authentication.
 
 ## Priority Matrix
 
@@ -120,6 +120,7 @@ At first I tried creating a separate javascript file, but then I realized that t
 ## Change Log
  Use this section to document what changes were made and the reasoning behind those changes.  
  - I wanted to use a css framework to make the page responsive, but instead I wrote out the code so I had more control over it
+ -with the extra time, I was able to utilize autocomplete, user authentication and location services.  This all makes for better user experience. 
 
  
 ## Issues and Resolutions

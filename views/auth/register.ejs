@@ -1,9 +1,16 @@
 <%# views/auth/register.ejs %>
-<% include ../partials/boilerplate %>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="/authstyle.css">
+  </head>
+  <body>
 
-<form method="POST" action="/auth/register">
-  <input name="username" type="text" placeholder="username" required />
-  <input name="email" type="email" placeholder="email" required />
-  <input name="password" type="password" placeholder="password" required />
+
+
+<form id ='register' method="POST" action="/auth/register">
+  <input name="username" type="text" placeholder="username" required /><br>
+  <input name="email" type="email" placeholder="email" required /> <br>
+  <input name="password" type="password" placeholder="password" required /> <br>
   <input type="submit" value="Register!" />
 </form>
