@@ -20,16 +20,18 @@ Use this section to describe your final project and perhaps any links to relevan
 
 Where 2 Pee NYC stores information about public restrooms throughout NYC.  Its CRUD functionality allows users to store additional restrooms to the database.  It uses 2 tables- a locations table that stores name, address, lat & long (needed to render the icons to the map), and venue_id, which reference the venues table. This app uses the google maps API to obtain latitude and longitude, and formatted address- which is then stored to the table.  It also utilises google maps’ autocomplete and location services.  The app uses passport for user authentication.
 
+slides - https://docs.google.com/presentation/d/1yXteMhkLOfjiVN-Ju0R0_TiEakgL197bSsvy4mFE-zA/edit?usp=sharing
+
 ## Priority Matrix
 
-Include a full list of features that have been prioritized based on the `Time and Importance` Matix. 
+Include a full list of features that have been prioritized based on the `Time and Importance` Matix.
 - 2 tables: 1 for locations and 1 for venue type - 5 hours
 - Google maps API that renders map and pulls lat and long from locations table and renders to map - 8 hours
 - Crud functionality allowing user to add locations - 12 hours
 
-## MVP 
- 
-Include the full list of features that will be part of your MVP 
+## MVP
+
+Include the full list of features that will be part of your MVP
 - 2 tables: 1 for locations and 1 for venue type
 - Google maps API that renders map and pulls lat and long from locations table and renders to map
 - Crud functionality allowing user to add locations
@@ -45,7 +47,7 @@ Include the full list of features that you are considering for POST MVP
 
 ## Wireframes
 
-Include images of your wireframes. 
+Include images of your wireframes.
 
 ![](https://i.imgur.com/iI5NNo6.jpg)
 ![](https://i.imgur.com/Y3gGpSk.jpg?1)
@@ -68,9 +70,9 @@ Include images of your wireframes.
 
 ## Functional Components
 
-Based on the initial logic defined in the previous game phases section try and breakdown the logic further into functional components, and by that we mean functions.  Does your logic indicate that code could be encapsulated for the purpose of reusablility.  Once a function has been defined it can then be incorporated into a class as a method. 
+Based on the initial logic defined in the previous game phases section try and breakdown the logic further into functional components, and by that we mean functions.  Does your logic indicate that code could be encapsulated for the purpose of reusablility.  Once a function has been defined it can then be incorporated into a class as a method.
 
-Time frames are also key in the development cycle.  You have limited time to code all phases of the game.  Your estimates can then be used to evalute game possibilities based on time needed and the actual time you have before game must be submitted. 
+Time frames are also key in the development cycle.  You have limited time to code all phases of the game.  Your estimates can then be used to evalute game possibilities based on time needed and the actual time you have before game must be submitted.
 
 | Component | Priority | Estimated Time | Time Invetsted | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
@@ -85,12 +87,19 @@ Time frames are also key in the development cycle.  You have limited time to cod
 ## Helper Functions
 Helper functions should be generic enought that they can be reused in other applications. Use this section to document all helper functions that fall into this category.
 
-| Function | Description | 
+| Function | Description |
 | --- | :---: |  
-| JSON.stringify() | Turns javascript value into JSON string - needed this to loop thruogh locations table in script| 
+| JSON.stringify() | Turns javascript value into JSON string - needed this to loop thruogh locations table in script|
 
 ## Additional Libraries
- Use this section to list all supporting libraries and thier role in the project. 
+ Use this section to list all supporting libraries and thier role in the project.
+
+ SERVER- node.js/ express.js
+LANGUAGES- HTML/ CSS/ Javascript
+API- Google Maps API
+MODULES- Nodemon, body-parser, express, pg-promise, morgan, method-override, body parser, EJS, Passport, bcryptjs, cookie-parser, dotenv, express-session, axios
+!!!!
+
 
 ## Code Snippet
 
@@ -98,8 +107,8 @@ Use this section to include a brief code snippet of functionality that you are p
 
 The below is part of a larger function that creates the map.
 I was very concerned with how I would pull lat and long from the table and render it to the map.
-I had to include a script tag in my index page. 
-At first I tried creating a separate javascript file, but then I realized that the data being returned from my controller was being sent to my ejs, but not my script.js, so I compiled it all onto the same page, with a script tag on my ejs. 
+I had to include a script tag in my index page.
+At first I tried creating a separate javascript file, but then I realized that the data being returned from my controller was being sent to my ejs, but not my script.js, so I compiled it all onto the same page, with a script tag on my ejs.
 ```let locations = <%- JSON.stringify(locations) %>
     for(i = 0; i < locations.length; i++){
       let pooIcon = new google.maps.Marker({
@@ -120,12 +129,12 @@ At first I tried creating a separate javascript file, but then I realized that t
 ## Change Log
  Use this section to document what changes were made and the reasoning behind those changes.  
  - I wanted to use a css framework to make the page responsive, but instead I wrote out the code so I had more control over it
- -with the extra time, I was able to utilize autocomplete, user authentication and location services.  This all makes for better user experience. 
+ -with the extra time, I was able to utilize autocomplete, user authentication and location services.  This all makes for better user experience.
 
- 
+
 ## Issues and Resolutions
  Use this section to list of all major issues encountered and their resolution.
- -couldn't get icons to render when in a separate script file, so ended up moving them to a script tag within the ejs file. 
+ -couldn't get icons to render when in a separate script file, so ended up moving them to a script tag within the ejs file.
 - error: syntax error at or near "BY"
 - solution: SELECT * FROM locations OBRDER BY lng -> SELECT * FROM locations OBRDER BY lng DESC
 - couldn't get edit page to default to the location's venue based on its venue id
