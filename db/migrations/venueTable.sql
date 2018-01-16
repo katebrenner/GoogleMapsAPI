@@ -1,4 +1,4 @@
-\c mapdb
+
 
 DROP TABLE IF EXISTS venue;
 
@@ -6,4 +6,3 @@ CREATE TABLE IF NOT EXISTS venue (
   venue_id SERIAL PRIMARY KEY NOT NULL,
   venue_type VARCHAR(60) NOT NULL
 );
-

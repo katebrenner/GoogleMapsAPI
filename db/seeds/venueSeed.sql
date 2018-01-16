@@ -1,4 +1,3 @@
-\c mapdb
 
 INSERT INTO venue (venue_type) VALUES
 ('Coffee Shop'),

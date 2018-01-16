@@ -1,4 +1,3 @@
-\c mapdb
 
 DROP TABLE IF EXISTS locations;
 
@@ -11,4 +10,3 @@ CREATE TABLE IF NOT EXISTS locations (
   -- hrs VARCHAR(255),
   venue_id INTEGER REFERENCES venue(venue_id)
 );
-

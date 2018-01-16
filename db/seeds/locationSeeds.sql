@@ -1,4 +1,4 @@
-\c mapdb
+
 
 INSERT INTO locations (name, address, lat, lng, venue_id) VALUES(
   'Grand Central Terminal', '89 E 42nd St, New York, NY', 40.7525703, -73.9776273, 6
@@ -36,4 +36,3 @@ INSERT INTO locations (name, address, lat, lng, venue_id) VALUES(
 (
   'Chelsea Market', '75 9th Ave, New York, NY', 40.742171, -74.005092, 9
 );
-
