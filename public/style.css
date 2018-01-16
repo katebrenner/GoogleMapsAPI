@@ -12,8 +12,10 @@
 .logout {
   position: absolute;
   z-index: 1;
-  top: 10%;
-  left: 75%;
+  top: 5%;
+  left: 80%;
+  background-color: white;
+  text-align: center;
 }
 
 .emojiheader {
@@ -144,5 +146,3 @@ h3 {
     display: inherit;
   }
 }
-
-
