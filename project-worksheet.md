@@ -1,26 +1,11 @@
 # Project Overview
 
-## Project Schedule
-
-This schedule will be used to keep track of your progress throughout the week and align with our expectations.  
-
-You are **responsible** for scheduling time with your squad to seek approval for each deliverable by the end of the corresponding day, excluding `Saturday` and `Sunday`.
-
-|  Day | Deliverable | Approval From Squad Lead
-|---|---| ---|
-|Day 1: Fri| Game Idea, Wireframes and Priority Matrix|
-|Day 2: Mon| Pseudocode\Actual code\Basic Clickable Model|
-|Day 3: Tue| Working Prototype |
-|Day 4: Wed| App Completed / Slides |
-|Day 5: Thur| Project Presentations |
-
 ## Project Description
 
 Use this section to describe your final project and perhaps any links to relevant sites that help convey the concept and\or functionality.
 
 Where 2 Pee NYC stores information about public restrooms throughout NYC.  Its CRUD functionality allows users to store additional restrooms to the database.  It uses 2 tables- a locations table that stores name, address, lat & long (needed to render the icons to the map), and venue_id, which reference the venues table. This app uses the google maps API to obtain latitude and longitude, and formatted address- which is then stored to the table.  It also utilises google maps’ autocomplete and location services.  The app uses passport for user authentication.
 
-slides - https://docs.google.com/presentation/d/1yXteMhkLOfjiVN-Ju0R0_TiEakgL197bSsvy4mFE-zA/edit?usp=sharing
 
 ## Priority Matrix
 
@@ -53,26 +38,11 @@ Include images of your wireframes.
 ![](https://i.imgur.com/Y3gGpSk.jpg?1)
 
 
-## App Components
-
-### Creating Items
-
-
-### Deleting Items
-
-
-### Editing Items
-
-
-### Getting Items
-
 
 
 ## Functional Components
 
-Based on the initial logic defined in the previous game phases section try and breakdown the logic further into functional components, and by that we mean functions.  Does your logic indicate that code could be encapsulated for the purpose of reusablility.  Once a function has been defined it can then be incorporated into a class as a method.
-
-Time frames are also key in the development cycle.  You have limited time to code all phases of the game.  Your estimates can then be used to evalute game possibilities based on time needed and the actual time you have before game must be submitted.
+Estimated time vs time invested 
 
 | Component | Priority | Estimated Time | Time Invetsted | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
@@ -82,59 +52,20 @@ Time frames are also key in the development cycle.  You have limited time to cod
 |  Autocomplete | M | 5hrs| 5hrs | 5hrs |
 |  location detection | M | 5hrs| 2hrs | 2hrs |
 |  Places API for location hours(didn't use) | L | 5hrs| 5hrs | 5hrs |
-|  User Auth(in progress- hours logged so far) | L | 15hrs| 5hrs | 5hrs |
+|  User Auth | L | 15hrs| 5hrs | 5hrs |
 
-## Helper Functions
-Helper functions should be generic enought that they can be reused in other applications. Use this section to document all helper functions that fall into this category.
+## Additional Libraries/Languages
 
-| Function | Description |
-| --- | :---: |  
-| JSON.stringify() | Turns javascript value into JSON string - needed this to loop thruogh locations table in script|
 
-## Additional Libraries
- Use this section to list all supporting libraries and thier role in the project.
-
- SERVER- node.js/ express.js
+SERVER- node.js/ express.js
 LANGUAGES- HTML/ CSS/ Javascript
 API- Google Maps API
 MODULES- Nodemon, body-parser, express, pg-promise, morgan, method-override, body parser, EJS, Passport, bcryptjs, cookie-parser, dotenv, express-session, axios
-!!!!
-
-
-## Code Snippet
-
-Use this section to include a brief code snippet of functionality that you are proud of an a brief description.  
-
-The below is part of a larger function that creates the map.
-I was very concerned with how I would pull lat and long from the table and render it to the map.
-I had to include a script tag in my index page.
-At first I tried creating a separate javascript file, but then I realized that the data being returned from my controller was being sent to my ejs, but not my script.js, so I compiled it all onto the same page, with a script tag on my ejs.
-```let locations = <%- JSON.stringify(locations) %>
-    for(i = 0; i < locations.length; i++){
-      let pooIcon = new google.maps.Marker({
-        class: 'pooIcon',
-        position: {lat: locations[i].lat, lng: locations[i].lng},
-        map: map,
-        icon: icon })```
-
-## jQuery Discoveries
- Use this section to list some, but not all, of the jQuery methods and\or functionality discovered while working on this project.
-
- I used no jQuery.  The google maps documentation and built in functions were all in plain javascripy.  I did not want to mix the two.  If anything, it was a good refresher in manipulating ther DOM with javascipt.  A list of some javascript DOM manipulation that I used is below:
- -document.createElement('p');
- - element.innerHTML = 'text';
- - element.className = 'classname';
- - document.getElementById('side').appendChild(child);
-
-## Change Log
- Use this section to document what changes were made and the reasoning behind those changes.  
- - I wanted to use a css framework to make the page responsive, but instead I wrote out the code so I had more control over it
- -with the extra time, I was able to utilize autocomplete, user authentication and location services.  This all makes for better user experience.
 
 
 ## Issues and Resolutions
  Use this section to list of all major issues encountered and their resolution.
- -couldn't get icons to render when in a separate script file, so ended up moving them to a script tag within the ejs file.
+- couldn't get icons to render when in a separate script file, so ended up moving them to a script tag within the ejs file.
 - error: syntax error at or near "BY"
 - solution: SELECT * FROM locations OBRDER BY lng -> SELECT * FROM locations OBRDER BY lng DESC
 - couldn't get edit page to default to the location's venue based on its venue id
@@ -142,6 +73,21 @@ At first I tried creating a separate javascript file, but then I realized that t
 - App was adaptive  but not responsive, so added event listeners on window resizing, just in case you are the 0.5% that likes to resize your browser while on a site
 - Not resolved- deployment
 
-#### SAMPLE.....
-**ERROR**: app.js:34 Uncaught SyntaxError: Unexpected identifier                                
-**RESOLUTION**: Missing comma after first object in sources {} object
+## Code Snippet
+
+Use this section to include a brief code snippet of functionality that you are proud of an a brief description.  
+
+The below is part of a larger function that creates the map.  This is where the function loops over the locations in the db
+I was very concerned with how I would pull lat and long from the table and render it to the map.
+I had to include a script tag in my index page.
+At first I tried creating a separate javascript file, but then I realized that the data being returned from my controller was being sent to my ejs, but not my script.js, so I compiled it all onto the same page, with a script tag on my ejs.
+```
+let locations = <%- JSON.stringify(locations) %>
+    for(i = 0; i < locations.length; i++){
+      let pooIcon = new google.maps.Marker({
+        class: 'pooIcon',
+        position: {lat: locations[i].lat, lng: locations[i].lng},
+        map: map,
+        icon: icon })
+        ```
+
