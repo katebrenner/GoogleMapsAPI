@@ -2,17 +2,8 @@
 
 ## Project Description
 
-Use this section to describe your final project and perhaps any links to relevant sites that help convey the concept and\or functionality.
 
-Where 2 Pee NYC stores information about public restrooms throughout NYC.  Its CRUD functionality allows users to store additional restrooms to the database.  It uses 2 tables- a locations table that stores name, address, lat & long (needed to render the icons to the map), and venue_id, which reference the venues table. This app uses the google maps API to obtain latitude and longitude, and formatted address- which is then stored to the table.  It also utilises google maps’ autocomplete and location services.  The app uses passport for user authentication.
-
-
-## Priority Matrix
-
-Include a full list of features that have been prioritized based on the `Time and Importance` Matix.
-- 2 tables: 1 for locations and 1 for venue type - 5 hours
-- Google maps API that renders map and pulls lat and long from locations table and renders to map - 8 hours
-- Crud functionality allowing user to add locations - 12 hours
+Where 2 Pee NYC stores information about public restrooms throughout NYC.  Its CRUD functionality allows users to store additional restrooms to the database.  It uses 2 tables- a locations table that stores name, address, lat & long (needed to render the icons to the map), and venue_id, which reference the venues table.  This app uses the google maps API to obtain latitude and longitude, and formatted address- which is then stored to the table.  It also utilizes google maps’ autocomplete and location services.  The app uses passport for user authentication.
 
 ## MVP
 
