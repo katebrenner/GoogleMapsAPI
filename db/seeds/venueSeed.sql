@@ -1,4 +1,3 @@
-
 INSERT INTO venue (venue_type) VALUES
 ('Coffee Shop'),
 ('Residence'),

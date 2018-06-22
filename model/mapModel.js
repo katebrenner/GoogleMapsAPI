@@ -1,9 +1,12 @@
 const db = require('../db/config');
-const mapModel = {}
+const mapModel = {};
 
 mapModel.findall = () => {
-  return db.query('SELECT * FROM locations JOIN venue ON locations.venue_id = venue.venue_id ORDER BY lng DESC')
-}
+  return db.query(
+    `SELECT * FROM locations
+    JOIN venue ON locations.venue_id = venue.venue_id
+    ORDER BY lng DESC`);
+};
 
 
 mapModel.create = locations => {
@@ -18,7 +21,7 @@ mapModel.create = locations => {
 };
 
 mapModel.findById = (id) => {
-  return db.oneOrNone(`SELECT * FROM locations WHERE id = $1`, [id])
+  return db.oneOrNone(`SELECT * FROM locations WHERE id = $1`, [id]);
 };
 
 mapModel.update = (locations, id) => {
@@ -40,10 +43,6 @@ mapModel.destroy = id => {
     `,
     [id]
   );
-}
+};
 
-
-
-
-
-module.exports = mapModel
+module.exports = mapModel;

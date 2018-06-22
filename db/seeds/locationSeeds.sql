@@ -1,5 +1,3 @@
-
-
 INSERT INTO locations (name, address, lat, lng, venue_id) VALUES(
   'Grand Central Terminal', '89 E 42nd St, New York, NY', 40.7525703, -73.9776273, 6
 ),

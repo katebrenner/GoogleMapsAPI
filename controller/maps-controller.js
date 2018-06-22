@@ -1,20 +1,18 @@
- const mapModel = require('../model/mapModel');
- const venueModel = require('../model/venueModel');
- const axios = require('axios');
- const mapController = {}
+const mapModel = require('../model/mapModel');
+const venueModel = require('../model/venueModel');
+const axios = require('axios');
+const mapController = {};
 
 
 mapController.index = (req, res) => {
-  console.log(req.user)
   mapModel.findall().then( locations => {
     res.render('map/index', {
       locations: locations,
       user: req.user
     });
   }).catch(err => {
-    console.log(err);
-    res.status(500).json(err)
-  })
+    res.status(500).json(err);
+  });
 };
 
 mapController.new = (req, res) => {
@@ -25,12 +23,10 @@ mapController.new = (req, res) => {
       url: `https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.address}&key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk` })
     .then( data => {
       let place_id = data.data.results[0].place_id;
-      console.log(place_id)
       axios ({
         method: 'get',
         url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=AIzaSyCwGVukC1LFAwcw415VQCJpNb3n4V8VYUk`
       }).then ( placesData => {
-        console.log(placesData.data.result.opening_hours.weekday_text)
        res.render('map/new', {
         hours: placesData.result,
         latval: data.data.results[0].geometry.location.lat,
@@ -38,11 +34,10 @@ mapController.new = (req, res) => {
         address: data.data.results[0].formatted_address,
         venue: venue
       });
-    })
+    });
   })
     .catch(err => {
-      console.log(err)
-      res.status(400).send('error');
+      res.status(400).send('error' + err);
     });
   });
 };
@@ -58,7 +53,7 @@ mapController.create = (req, res) => {
       venue_id: req.body.venue_id
     })
     .then((params) => {
-      res.redirect(`/map/${params.id}`)
+      res.redirect(`/map/${params.id}`);
     })
     .catch(err => {
       res.status(400).json(err);
@@ -70,13 +65,13 @@ mapController.show = (req, res) => {
     .then(locations => {
       venueModel.findById(locations.venue_id)
         .then(venue => {
-            console.log('hi')
-            res.render('map/show', { locations: locations, venue: venue })
+            res.render('map/show',
+              { locations: locations, venue: venue });
           })
           .catch(err => {
             res.status(400).json(err);
           });
-    })
+    });
 };
 
 
@@ -87,11 +82,11 @@ mapController.edit = (req,res) => {
       .then(venue => res.render('map/edit', {
         locations: locations,
         venue: venue
-      }))
+      }));
     })
     .catch(err => {
-      res.status(400).json(err)
-    })
+      res.status(400).json(err);
+    });
 };
 
 mapController.update = (req, res) => {
@@ -100,22 +95,21 @@ mapController.update = (req, res) => {
     venue_id: req.body.venue_id
   }, req.params.id)
   .then(() => {
-    res.redirect('/map')
+    res.redirect('/map');
   })
   .catch(err => {
-    console.log(err)
-    res.status(400).json(err)
-  })
+    res.status(400).json(err);
+  });
 };
 
 mapController.destroy = (req, res) => {
   mapModel.destroy(req.params.id)
     .then(() => {
-      res.redirect('/map')
+      res.redirect('/map');
     })
     .catch(err => {
       res.status(400).json(err);
     });
 };
 
- module.exports = mapController
+ module.exports = mapController;

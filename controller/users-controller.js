@@ -4,7 +4,6 @@ const User = require('../model/userModel.js');
 const usersController = {};
 
 usersController.create = (req, res) => {
-  console.log(req);
   const salt = bcrypt.genSaltSync();
   const hash = bcrypt.hashSync(req.body.password, salt);
   User.create({
@@ -17,10 +16,9 @@ usersController.create = (req, res) => {
       res.redirect('/map');
     });
   }).catch(err => {
-    console.log(err);
     res.status(500).json({error: err});
   });
-}
+};
 
 // error will look like this so need a page for it:
 

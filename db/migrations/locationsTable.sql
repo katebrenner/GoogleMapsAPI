@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS locations;
 
 CREATE TABLE IF NOT EXISTS locations (

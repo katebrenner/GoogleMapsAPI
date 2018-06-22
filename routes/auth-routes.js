@@ -22,7 +22,6 @@ authRouter.post('/login', passport.authenticate('local', {
 );
 
 authRouter.get('/logout', (req, res) => {
-  console.log('logout')
   req.logout();
   res.redirect('/map');
 });

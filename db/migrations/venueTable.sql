@@ -1,5 +1,3 @@
-
-
 DROP TABLE IF EXISTS venue;
 
 CREATE TABLE IF NOT EXISTS venue (

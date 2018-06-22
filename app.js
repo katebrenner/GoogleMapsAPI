@@ -1,6 +1,6 @@
 // requiring modules
 const express = require('express');
-const app = express()
+const app = express();
 const morgan = require('morgan');
 const override = require('method-override');
 const path = require('path');
@@ -11,7 +11,7 @@ const session = require('express-session');
 const passport = require('passport');
 const authHelpers = require('./services/auth/auth-helpers');
 //requiring routers
-const router = require('./routes/map-routes')
+const router = require('./routes/map-routes');
 const authRouter = require('./routes/auth-routes');
 //setting up port on local host 3000
 const PORT = process.env.PORT || 3000;
@@ -28,7 +28,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', authRouter);
-app.use(authHelpers.loginRequired)
+app.use(authHelpers.loginRequired);
 app.use(morgan('dev'));
 app.use(override('_method'));
 app.use(bodyParser.urlencoded({
